@@ -14,6 +14,13 @@ openshift_cluster_content:
     - projects
 
 - object: Secrets
+  post_steps:
+    - role: "{{ inventory_dir }}/../roles/link-secrets"
+      vars:
+        secret_name: my-registry-secret
+        # Hacky setting tmp_dep_dir to empty string here!
+        # Otherwise the pre-post-step task SILENTLY fails because tmp_dep_dir is undefined. HA!
+        tmp_dep_dir:
   content:
   - name: Registry Secret
     template: "{{ inventory_dir }}/templates/secret-docker-cfg-stringdata.yml"
