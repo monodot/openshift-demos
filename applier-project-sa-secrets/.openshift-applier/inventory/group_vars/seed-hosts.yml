@@ -1,0 +1,25 @@
+namespace: myproject
+namespace_desc: "My Demo Projecty"
+
+openshift_cluster_content:
+- object: Projects
+  content:
+  - name: Demo Project
+    template: "{{ inventory_dir }}/templates/project-template.yml"
+    action: create
+    params_from_vars:
+      NAMESPACE: "{{ namespace }}"
+      NAMESPACE_DISPLAY_NAME: "{{ namespace_desc }}"
+    tags:
+    - projects
+
+- object: Secrets
+  content:
+  - name: Registry Secret
+    template: "{{ inventory_dir }}/templates/secret-docker-cfg-stringdata.yml"
+    params_from_vars:
+      NAME: my-registry-secret
+      REPO_FQDN: my-registry.example.com
+      REPO_AUTH: fzzzzbzbzzbzbzzbzzzzzzzzzbzzzz
+    tags:
+    - secrets

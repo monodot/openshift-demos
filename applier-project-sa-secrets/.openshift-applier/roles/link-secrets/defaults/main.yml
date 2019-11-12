@@ -1,0 +1,5 @@
+---
+secret_name: my-registry-secret
+default_sa: default
+builder_sa: builder
+deployer_sa: deployer

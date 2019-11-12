@@ -1,0 +1,13 @@
+---
+
+- name: "Link secret to default"
+  command: >
+    oc secrets link {{ default_sa }} {{ secret_name }} --for=pull
+
+- name: "Link secret to builder"
+  command: >
+    oc secrets link {{ builder_sa }} {{ secret_name }} --for=pull
+
+- name: "Link secret to deployer"
+  command: >
+    oc secrets link {{ deployer_sa }} {{ secret_name }} --for=pull
